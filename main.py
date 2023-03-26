@@ -3,10 +3,35 @@ from PIL import Image
 from preprocess import view_image
 from predict import transfer
 import cv2
+import base64
 
 st.title('Glorifying Monuments in Odisha')
 
 st.subheader("Content Image")
+
+@st.cache(allow_output_mutation=True)
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+def set_png_as_page_bg(png_file):
+    bin_str = get_base64_of_bin_file(png_file)
+    page_bg_img = '''
+    <style>
+    body {
+    background-image: url("data:image/png;base64,%s");
+    background-size: cover;
+    }
+    </style>
+    ''' % bin_str
+    
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+    return
+
+set_png_as_page_bg('download.jpg')
+
+
 content_image = st.file_uploader("Upload Images", type=["png", "jpg", "jpeg"], key='content_image')
 
 if content_image is not None:
