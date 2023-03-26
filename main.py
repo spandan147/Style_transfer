@@ -39,7 +39,7 @@ if content_image is not None:
                     "filesize": content_image.size}
     st.write(file_details)
     st.image(view_image(content_image), width=400)
-bg = PhotoImage(file = "download.png")
+
 st.subheader("Style Image")
 style_Image = st.file_uploader("Upload Images", type=["png", "jpg", "jpeg"], key='style_image')
 
