@@ -29,7 +29,7 @@ def set_png_as_page_bg(png_file):
     st.markdown(page_bg_img, unsafe_allow_html=True)
     return
 
-set_png_as_page_bg('download.jpg')
+set_png_as_page_bg('download.png')
 
 
 content_image = st.file_uploader("Upload Images", type=["png", "jpg", "jpeg"], key='content_image')
