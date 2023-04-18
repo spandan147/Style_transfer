@@ -3,7 +3,7 @@ from PIL import Image
 import numpy as np
 import streamlit as st
 
-@st.cache
+@st.cache_data()
 def load_image(upload_img):
     img = Image.open(upload_img).convert('RGB')
     img = np.asarray(img)
@@ -11,12 +11,12 @@ def load_image(upload_img):
     img = img[tf.newaxis, :]
     return img
 
-@st.cache
+@st.cache_data()
 def view_image(image_file):
     img = Image.open(image_file)
     return img
 
-@st.cache
+@st.cache_data()
 def tensor_to_image(tensor):
     tensor = tensor * 255
     tensor = np.array(tensor, dtype=np.uint8)
