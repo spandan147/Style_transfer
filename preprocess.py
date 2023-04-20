@@ -11,12 +11,12 @@ def load_image(upload_img):
     img = img[tf.newaxis, :]
     return img
 
-@st.cache_data()
+@st.cache()
 def view_image(image_file):
     img = Image.open(image_file)
     return img
 
-@st.cache_data()
+@st.cache()
 def tensor_to_image(tensor):
     tensor = tensor * 255
     tensor = np.array(tensor, dtype=np.uint8)
