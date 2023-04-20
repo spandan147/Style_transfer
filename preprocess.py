@@ -3,7 +3,7 @@ from PIL import Image
 import numpy as np
 import streamlit as st
 
-@st.cache_data()
+@st.cache()
 def load_image(upload_img):
     img = Image.open(upload_img).convert('RGB')
     img = np.asarray(img)
