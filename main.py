@@ -9,23 +9,6 @@ import base64
 st.set_page_config(page_title="Glorifying Monuments in India", layout='wide')
 st.title("Glorifying Monuments in India")
 
-# # Show a modal dialog
-# if st.button('Open Dialog'):
-#     st.markdown(
-#         """
-#         <div style='position:fixed;left:0px;top:0px;width:100%;height:100%;background-color:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-axis:100;'>
-#         <div style='background-color:#ffffff;padding:20px;width:300px;'>
-#         <h2 style='text-align:center;'>Dialog Title</h2>
-#         <p style='text-align:center;'>Dialog Content</p>
-#         <p style='text-align:center;'>
-#         <button onclick='document.getElementById("dialog").style.display="none";'>Close</button>
-#         </p>
-#         </div>
-#         </div>
-#         """,
-#         unsafe_allow_html=True
-#     )
-
 # Content Image
 st.subheader("Upload images here:")
 
@@ -54,26 +37,32 @@ def set_png_as_page_bg(png_file):
 
 set_png_as_page_bg('download.png')
 
-content_image = st.file_uploader(
+content_image_placeholder = st.empty()
+content_image = content_image_placeholder.file_uploader(
     "Upload Images", type=["png", "jpg", "jpeg"], key='content_image')
+# content_image = st.file_uploader(
+#     "Upload Images", type=["png", "jpg", "jpeg"], key='content_image')
 
 if content_image is not None:
-    file_details = {"filename": content_image.name, "filetype": content_image.type,
-                    "filesize": content_image.size}
-    st.write(file_details)
-    st.image(view_image(content_image), width=400)
+    # file_details = {"filename": content_image.name, "filetype": content_image.type,
+    #                 "filesize": content_image.size}
+    # st.write(file_details)
+    st.image(view_image(content_image), width=200)
 
 # Style Image
 st.subheader("Style Image")
 
-style_Image = st.file_uploader(
+# style_Image = st.file_uploader(
+#     "Upload Images", type=["png", "jpg", "jpeg"], key='style_image')
+style_Image_placeholder = st.empty()
+style_Image = style_Image_placeholder.file_uploader(
     "Upload Images", type=["png", "jpg", "jpeg"], key='style_image')
 
 if style_Image is not None:
-    file_details = {"filename": style_Image.name, "filetype": style_Image.type,
-                    "filesize": style_Image.size}
-    st.write(file_details)
-    st.image(view_image(style_Image), width=400)
+    # file_details = {"filename": style_Image.name, "filetype": style_Image.type,
+    #                 "filesize": style_Image.size}
+    # st.write(file_details)
+    st.image(view_image(style_Image), width=200)
 
 # Stylize Button
 clicked = st.button('Stylize')
@@ -83,10 +72,44 @@ if clicked:
         output_image = transfer(content_image, style_Image)
         st.write('### Output image:')
         image = Image.open(output_image)
-        st.image(image, width=400)
+
+        # Load the output image on a new page using an expander or sidebar
+        with st.expander("Output Image", expanded=True):
+            st.image(image, width=400, use_column_width=True)
+
+        # # Remove uploaded images from display
+        # content_image = None
+        # style_Image = None
+
+        # Remove uploaded images from display and clear the placeholders
+        content_image_placeholder = st.empty()
+        style_Image_placeholder = st.empty()
+
+        # Refresh Button
+        if st.button('Refresh', key='refresh_button'):
+            st.caching.clear_cache()
+    # if style_Image is not None and content_image is not None:
+    #     output_image = transfer(content_image, style_Image)
+    #     st.write('### Output image:')
+    #     image = Image.open(output_image)
+    #     st.image(image, width=400)
+
+    #     # Remove uploaded images from display
+    #     content_image = None
+    #     style_Image = None
+
+    #     # Refresh Button
+    #     if st.button('Refresh', key='refresh_button'):
+    #         st.caching.clear_cache()
+
     elif style_Image is None:
         st.write('Please Upload Style Image')
     elif content_image is None:
         st.write('Please Upload Content Image')
     elif style_Image is None and content_image is None:
         st.write('Please Upload Style and Content Image')
+
+# Refresh Button
+if st.button('Refresh'):
+    st.caching.clear_cache()
+    # Add code to reset any states or variables if necessary
