@@ -83,9 +83,9 @@ if clicked:
         content_image_placeholder = st.empty()
         style_Image_placeholder = st.empty()
 
-        # Refresh Button
-        if st.button('Refresh', key='refresh_button'):
-            st.caching.clear_cache()
+#         # Refresh Button
+#         if st.button('Refresh', key='refresh_button'):
+#             st.caching.clear_cache()
     # if style_Image is not None and content_image is not None:
     #     output_image = transfer(content_image, style_Image)
     #     st.write('### Output image:')
@@ -107,7 +107,7 @@ if clicked:
     elif style_Image is None and content_image is None:
         st.write('Please Upload Style and Content Image')
 
-# Refresh Button
-if st.button('Refresh'):
-    st.caching.clear_cache()
-    # Add code to reset any states or variables if necessary
+# # Refresh Button
+# if st.button('Refresh'):
+#     st.caching.clear_cache()
+#     # Add code to reset any states or variables if necessary
