@@ -10,7 +10,7 @@ st.set_page_config(page_title="RestoreIT", layout='wide')
 st.title("RestoreIT")
 
 # Content Image
-st.subheader("Upload images here:")
+st.subheader("Input Image")
 
 @st.cache()
 def get_base64_of_bin_file(bin_file):
