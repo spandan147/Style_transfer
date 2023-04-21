@@ -6,8 +6,8 @@ import cv2
 import base64
 
 # Update the title of the Streamlit app
-st.set_page_config(page_title="Glorifying Monuments in India", layout='wide')
-st.title("Glorifying Monuments in India")
+st.set_page_config(page_title="RestoreIT", layout='wide')
+st.title("RestoreIT")
 
 # Content Image
 st.subheader("Upload images here:")
